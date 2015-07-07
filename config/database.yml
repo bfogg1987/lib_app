@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: lib_app-development
+  pool: 5
+  username: BillFogg
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: lib_app-test
+  pool: 5
+  username: BillFogg
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: lib_app-production
+  pool: 5
+  username: BillFogg
+  password:

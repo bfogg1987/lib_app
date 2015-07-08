@@ -15,5 +15,10 @@
   <%= @book.publication_date %>
 </p>
 
+<p>
+  <strong>Serial number:</strong>
+  <%= @book.serial_number %>
+</p>
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

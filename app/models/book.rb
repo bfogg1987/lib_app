@@ -1,5 +1,7 @@
 class Book < ActiveRecord::Base
-	belongs_to :user
+
+	has_many :checkouts
+
 	validates :title, presence: true
 	validates :title, length: {minimum: 3}
 	validates :author, presence: true
@@ -9,4 +11,20 @@ class Book < ActiveRecord::Base
 	#validates :publication_date, presence: true
 	# validates_date :publication_date, presence: true
 	validates :publication_date, timeliness: { allow_nil: false, allow_blank: false }
+
+	def last_checkout
+		self.checkouts.last
+	end
+
+	def available?
+		return true if !last_checkout 
+		last_checkout.checked_in_at!=nil
+	end
+
+	def checked_out_by
+		return if available?
+
+		last_checkout.user
+	end
+
 end

@@ -18,7 +18,7 @@ class Book < ActiveRecord::Base
 
 	def available?
 		return true if !last_checkout 
-		last_checkout.checked_in_at!=nil
+		last_checkout.returned_at!=nil
 	end
 
 	def checked_out_by

@@ -23,7 +23,7 @@ class Book < ActiveRecord::Base
 
 	def checked_out_by
 		return if available?
-		last_checkout.user.email
+		last_checkout.user
 	end
 
 end

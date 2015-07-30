@@ -37,6 +37,39 @@ class BooksController < ApplicationController
     end
   end
 
+  def check_out
+    @book = Book.find(params[:id])
+    
+    if current_user.check_out!(@book)
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'Book was successfully checked out.' }
+        format.json { render :show, status: :checked_out, location: @book }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to books_url, alert: "Ugh, we couldn't check out your book..."}
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  def check_in
+    @book = Book.find(params[:id])
+    
+    if current_user.check_in!(@book)
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'Book was successfully checked in.' }
+        format.json { render :show, status: :checked_out, location: @book }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to books_url, alert: "Ugh, we couldn't check in your book..."}
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update

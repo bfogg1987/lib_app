@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          # :confirmable, :lockable, :timeoutable and :omniauthable
 
+  def checked_out_books
+    checkouts = self.checkouts.where(:returned_at => nil)
+    book_ids = checkouts.map(&:book_id)
+    books = Book.where(:id => book_ids)
+  end
+
   def check_out!(book)
   	return false if !book || !book.available?
   	

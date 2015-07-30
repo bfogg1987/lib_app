@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'check_out', :to => 'books#check_out'
     end
   end
+  get '/account', :to => 'accounts#account'
   root 'books#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
